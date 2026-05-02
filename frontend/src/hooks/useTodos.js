@@ -37,12 +37,11 @@ export function useTodos() {
     }
   };
 
-  // Update a todo (Optimistic UI Approach)
+  // Update a todo
   const updateTodo = async (updatedData) => {
-    // 1. Snapshot previous state in case we need to roll back
     const previousTodos = [...todos];
 
-    // 2. Update local state immediately (Optimistic Update)
+    // 2. Update local state immediately
     setTodos((prev) =>
       prev.map((todo) =>
         todo.id === updatedData.id ? { ...todo, ...updatedData } : todo,
@@ -53,23 +52,20 @@ export function useTodos() {
       // 3. Send update to server
       await todoService.update(updatedData);
     } catch (err) {
-      // 4. If server fails, revert back to previous state
       setTodos(previousTodos);
       console.error("Update failed, rolling back:", err);
     }
   };
 
-  // Delete a todo (Optimistic UI Approach)
+  // Delete a todo
   const deleteTodo = async (id) => {
     const previousTodos = [...todos];
 
-    // Remove from UI immediately
     setTodos((prev) => prev.filter((todo) => todo.id !== id));
 
     try {
       await todoService.delete(id);
     } catch (err) {
-      // Revert if server fails
       setTodos(previousTodos);
       console.error("Delete failed, rolling back:", err);
     }

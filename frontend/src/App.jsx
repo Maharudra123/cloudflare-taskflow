@@ -8,7 +8,6 @@ function App() {
   const { todos, isLoading, error, createTodo, updateTodo, deleteTodo } =
     useTodos();
 
-  // Derived state for the status bar
   const completedCount = todos.filter((t) => Boolean(t.completed)).length;
   const totalCount = todos.length;
 
