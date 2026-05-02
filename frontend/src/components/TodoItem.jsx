@@ -17,7 +17,7 @@ export default function TodoItem({ todo, onToggle, onDelete }) {
         {/* Custom Checkbox */}
         <button
           onClick={() => onToggle({ id: todo.id, completed: !isCompleted })}
-          className={`mt-1 flex-shrink-0 w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all duration-200 ${
+          className={`mt-1 shrink-0 w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all duration-200 ${
             isCompleted
               ? "bg-emerald-500 border-emerald-500 text-white"
               : "border-gray-300 hover:border-emerald-400 bg-white"
