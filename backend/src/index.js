@@ -4,11 +4,21 @@ import todosRouter from "./routes/todos.js";
 
 const app = new Hono();
 
-// Enable CORS for all routes
+const allowedOrigins = [
+  "https://taskflow-ui-wqc.pages.dev",
+  "http://localhost:5173",
+  "http://127.0.0.1:5173",
+];
+
 app.use(
   "/*",
   cors({
-    origin: "*",
+    origin: (origin) => {
+      if (allowedOrigins.includes(origin)) {
+        return origin;
+      }
+      return null;
+    },
     allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowHeaders: ["Content-Type", "Authorization"],
   }),
